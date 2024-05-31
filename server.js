@@ -5,10 +5,17 @@ const dotenv = require('dotenv');
 require('dotenv').config({ path: './config.env' });
 
 const signinController = require('./controllers/signinController.js');
-const employeesController = require('./controllers/employeesController.js');
-const addEmployeeController = require('./controllers/addEmployeeController.js');
-const deleteEmployeeController = require('./controllers/deleteEmployeeController.js'); // New import
+// admin controllers
+const adminEmployeesController = require('./controllers/admin/employeesController.js');
+const adminAddEmployeeController = require('./controllers/admin/addEmployeeController.js');
+const adminDeleteEmployeeController = require('./controllers/admin/deleteEmployeeController.js');
 
+// librarian controllers
+const librarianEmployeesController = require('./controllers/librarian/employeesController.js');
+const librarianAddEmployeeController = require('./controllers/librarian/addEmployeeController.js');
+const librarianDeleteEmployeeController = require('./controllers/librarian/deleteEmployeeController.js');
+
+// bibliographer controllers
 const app = express();
 
 const pool = require("./db");
@@ -20,9 +27,10 @@ app.use(cors({
 }));
 
 app.post("/signin", signinController.signin);
-app.post("/add-employee", addEmployeeController.addEmployee)
-app.get("/employees", employeesController.getEmployees);
-app.delete("/employees/:id", deleteEmployeeController.deleteEmployee); // New route
+app.get("/employees-admin", adminEmployeesController.getEmployees);
+app.get("/employees-librarian", librarianEmployeesController.getEmployees);
+app.post("/add-employee", adminAddEmployeeController.addEmployee)
+app.delete("/employees/:id", adminDeleteEmployeeController.deleteEmployee); 
 
 dotenv.config();
 
