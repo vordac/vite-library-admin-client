@@ -15,6 +15,7 @@ const adminEmployeesController = require('./controllers/admin/employeesControlle
 // librarian controllers
 const librarianEmployeesController = require('./controllers/librarian/employeesController.js');
 const formularsController = require('./controllers/librarian/formularsController.js');
+const deleteFormularController = require('./controllers/librarian/deleteFormularController.js');
 
 // bibliographer controllers
 const app = express();
@@ -38,6 +39,7 @@ app.post("/add-employee", addEmployeeController.addEmployee);
 
 // DELETE
 app.delete("/employees/:id", deleteEmployeeController.deleteEmployee); 
+app.delete('/formulars/:id', deleteFormularController.deleteFormular);
 
 dotenv.config();
 
